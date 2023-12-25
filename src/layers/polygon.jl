@@ -103,6 +103,9 @@ function add_polygon_layer!(
     if outline_width_field != :null 
         df_to_use[!,:OutlineWidth] = Tables.getcolumn(cols, outline_width_field)
     end
+    if height_field != :null 
+        df_to_use[!,:Height] = Tables.getcolumn(cols, height_field)
+    end
 
     buf = IOBuffer()
     CSV.write(buf, df_to_use)
@@ -221,7 +224,7 @@ function add_polygon_layer!(
             },
             "sizeScale": "$(outline_width_scale)",
             "heightField": {
-              "name": "$(height_field == :null ? "null" : "\"Height\"")",
+              "name": $(height_field == :null ? "null" : "\"Height\""),
               "type": "real"
             },
             "heightScale": "$(height_scale)"

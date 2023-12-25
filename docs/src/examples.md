@@ -140,3 +140,84 @@ KeplerGL.export_image(w, "trees.png")
 ```
 
 ![Hexbin example: trees of Paris](assets/trees.png)
+
+## Polygon: Building Footprints of San Francisco
+
+This example is a bit bigger. We're going to download the building footprints of San Francisco and visualize them.
+
+```julia
+using KeplerGL
+using Colors
+using CSV, DataFrames
+using Downloads
+```
+
+Note that the data for this example is much larger (about 200mb), so downloading and displaying
+the data may take a while. We use again `Downloads.jl` to retrieve the data. Luckily it's already in 
+a nice format.
+
+```julia
+sf_url = "https://data.sfgov.org/api/views/ynuv-fyni/rows.csv?accessType=DOWNLOAD"
+
+http_response = Downloads.download(sf_url);
+df = CSV.File(http_response) |> DataFrame
+```
+
+Now set the Mapbox token
+```julia
+token = "..."
+```
+
+Create the `KeplerGLMap` with the token, and set `center_map=false` to be able to choose the camera location and direction.
+```julia
+m = KeplerGL.KeplerGLMap(token, center_map=false)
+```
+
+Switch on 3d, but hide the button:
+```julia
+m.window[:toggle_3d_show] = false
+m.window[:toggle_3d_active] = true
+```
+
+Create the polygon layer:
+```julia
+KeplerGL.add_polygon_layer!(m, df, :shape;
+    color_range = parse.(Colorant, ["#194266","#194266","#194266","#355C7D","#355C7D","#63617F","#916681","#C06C84","#D28389","#F8B195"]),
+    color_field = :hgt_meancm, color_scale = "quantile", opacity = 0.38, 
+    height_field = :hgt_meancm, height_scale = "linear",
+    enable_3d = true, elevation_scale = 1.0, filled = true, outline = false)
+```
+
+Disable the map legend:
+```julia
+m.window[:map_legend_show]=false
+```
+
+Disable the labels on the map:
+```julia
+m.config[:config][:mapStyle][:visibleLayerGroups][:label]=false
+```
+
+Use a dark basemap:
+```julia
+m.config[:config][:mapStyle][:styleType]="dark"
+```
+
+Set the camera:
+```julia
+m.config[:config][:mapState][:latitude] = 37.774483242431074
+m.config[:config][:mapState][:longitude]= -122.40122776087189
+m.config[:config][:mapState][:zoom] = 13.744271777357321
+m.config[:config][:mapState][:pitch] = 54.106924511460385
+m.config[:config][:mapState][:bearing] = -124.5053380782918
+m.config[:config][:mapState][:dragRotate] = true
+``` 
+
+Render the map and export the image. This may take a bit of time because our data are large:
+```julia
+w = KeplerGL.render(m);
+
+KeplerGL.export_image(w, "sf.png")
+```
+
+![Polygon: Building Footprints of San Francisco](assets/sf.png)
