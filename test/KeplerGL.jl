@@ -7,6 +7,7 @@ using KeplerGL
 using Blink, GeoJSON
 using DataFrames, CSV, Colors, ColorBrewer
 using Random
+using Test
 
 # toggle this to write the new comparison files to disk
 write_to_disk = false
