@@ -1,0 +1,167 @@
+    <div id="app">
+        <!-- Kepler.gl map will be placed here-->
+    </div>
+
+    <!-- Load our React component. -->
+    <script>
+        /* Validate Mapbox Token */
+        MAPBOX_TOKEN = 'mytoken';
+        if ((MAPBOX_TOKEN || '') === '' || MAPBOX_TOKEN === 'PROVIDE_MAPBOX_TOKEN') {
+        alert(WARNING_MESSAGE);
+        }
+
+        /** STORE **/
+
+        const reducers = (function createReducers(redux, keplerGl) {
+        return redux.combineReducers({
+            // mount keplerGl reducer
+            keplerGl: keplerGl.keplerGlReducer.initialState({
+        uiState: {
+            readOnly: false,
+            activeSidePanel: null, 
+            currentModal: null,
+            mapControls: {
+                visibleLayers: {
+                    show: true,
+                    active: true
+                },
+                mapLegend: {
+                    show: true,
+                    active: true
+                },
+                toggle3d: {
+                    show: false,
+                    active: false
+                },
+                splitMap: {
+                    show: false,
+                    active: false
+                }
+            }
+        }
+    })
+
+        });
+        }(Redux, KeplerGl));
+
+        const middleWares = (function createMiddlewares(keplerGl) {
+        return keplerGl.enhanceReduxMiddleware([
+            // Add other middlewares here
+        ]);
+        }(KeplerGl));
+
+        const enhancers = (function createEnhancers(redux, middles) {
+        return redux.applyMiddleware(...middles);
+        }(Redux, middleWares));
+
+        const store = (function createStore(redux, enhancers) {
+        const initialState = {};
+
+        return redux.createStore(
+            reducers,
+            initialState,
+            redux.compose(enhancers)
+        );
+        }(Redux, enhancers));
+        // expose store globally:
+        window.store = store;
+        /** END STORE **/
+
+        /** COMPONENTS **/
+        const KeplerElement = (function (react, keplerGl, mapboxToken) {
+        return function(props) {
+            return react.createElement(
+            'div',
+            {style: {position: 'absolute', left: 0, width: '100vw', height: '100vh'}},
+            react.createElement(
+                keplerGl.KeplerGl,
+                {
+                    mapboxApiAccessToken: mapboxToken,
+                    id: 'app',
+                    width: props.width || 1200,
+                    height: props.height || 900
+                }
+            )
+            )
+        }
+        }(React, KeplerGl, MAPBOX_TOKEN));
+
+        const app = (function createReactReduxProvider(react, reactRedux, KeplerElement) {
+        return react.createElement(
+            reactRedux.Provider,
+            {store},
+            react.createElement(KeplerElement, null)
+        )
+        }(React, ReactRedux, KeplerElement));
+        /** END COMPONENTS **/
+
+        /** Render **/
+        (function render(react, reactDOM, app) {
+            reactDOM.render(app, document.getElementById('app'));
+        }(React, ReactDOM, app));
+
+        (function customize(keplerGl, store) {
+
+                let newDatasets = [];
+
+
+    csvstring = `geojson,Color
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-84.602761,42.76988],[-84.38471,42.769882],[-84.363659,42.775778],[-84.158189,42.776639],[-84.140713,42.424611],[-84.600403,42.421984],[-84.602761,42.76988]]]]},""type"":""Feature"",""properties"":{""NAME"":""Ingham"",""ALAND"":1440322252,""unemployment_rate"":4.4,""LSAD"":6,""AWATER"":11920176,""labor_force"":150600,""COUNTYFP"":65,""employed"":143970,""unemployment_level"":6630,""AFFGEOID"":""0500000US26065"",""GEOID"":26065,""STATEFP"":26,""COUNTYNS"":1622975}}",4.4
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-90.230331,32.049728],[-89.730066,32.047072],[-89.662086,32.047239],[-89.653025,31.780653],[-89.755103,31.774654],[-89.974586,31.761655],[-90.122565,31.75268],[-90.107491,31.777685],[-90.230331,32.049728]]]]},""type"":""Feature"",""properties"":{""NAME"":""Simpson"",""ALAND"":1525930832,""unemployment_rate"":4.8,""LSAD"":6,""AWATER"":3378529,""labor_force"":10997,""COUNTYFP"":127,""employed"":10466,""unemployment_level"":531,""AFFGEOID"":""0500000US28127"",""GEOID"":28127,""STATEFP"":28,""COUNTYNS"":695784}}",4.8
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-89.451616,31.434029],[-89.399178,31.434029],[-89.146092,31.434052],[-89.146176,31.000447],[-89.137967,30.909877],[-89.340806,30.909912],[-89.34072,30.994163],[-89.34895,31.01037],[-89.347863,31.3467],[-89.451073,31.346383],[-89.451616,31.434029]]]]},""type"":""Feature"",""properties"":{""NAME"":""Forrest"",""ALAND"":1207042799,""unemployment_rate"":4.8,""LSAD"":6,""AWATER"":10872920,""labor_force"":33967,""COUNTYFP"":35,""employed"":32337,""unemployment_level"":1630,""AFFGEOID"":""0500000US28035"",""GEOID"":28035,""STATEFP"":28,""COUNTYNS"":695742}}",4.8
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-71.651153,43.621119],[-71.648346,43.684511],[-71.581403,43.691949],[-71.521466,43.697992],[-71.531658,43.760979],[-71.43989,43.695558],[-71.344245,43.62922],[-71.34362,43.628794],[-71.208941,43.550517],[-71.162675,43.538959],[-71.159364,43.355123],[-71.236011,43.284994],[-71.471454,43.411298],[-71.55003,43.452701],[-71.612426,43.437893],[-71.727573,43.563411],[-71.651153,43.621119]]]]},""type"":""Feature"",""properties"":{""NAME"":""Belknap"",""ALAND"":1040130767,""unemployment_rate"":2.6,""LSAD"":6,""AWATER"":177190123,""labor_force"":30857,""COUNTYFP"":1,""employed"":30044,""unemployment_level"":813,""AFFGEOID"":""0500000US33001"",""GEOID"":33001,""STATEFP"":33,""COUNTYNS"":873174}}",2.6
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-81.391826,41.416317],[-81.391518,41.445222],[-81.391005,41.569716],[-81.29588,41.56995],[-81.294669,41.640889],[-81.101422,41.641457],[-81.102258,41.714307],[-81.003631,41.715137],[-81.003125,41.501685],[-81.003319,41.34786],[-81.391694,41.348272],[-81.391826,41.416317]]]]},""type"":""Feature"",""properties"":{""NAME"":""Geauga"",""ALAND"":1036429792,""unemployment_rate"":4.8,""LSAD"":6,""AWATER"":21045380,""labor_force"":48802,""COUNTYFP"":55,""employed"":46476,""unemployment_level"":2326,""AFFGEOID"":""0500000US39055"",""GEOID"":39055,""STATEFP"":39,""COUNTYNS"":1074040}}",4.8
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-82.313996,34.484002],[-82.236125,34.53583],[-82.238054,34.586956],[-82.146792,34.785554],[-82.071621,34.704242],[-81.863275,34.580231],[-81.854002,34.594549],[-81.677321,34.557972],[-81.643552,34.533652],[-81.703198,34.452631],[-81.737103,34.430544],[-81.782627,34.365089],[-81.895331,34.300497],[-81.945019,34.203148],[-82.08367,34.29924],[-82.168857,34.330151],[-82.246337,34.409676],[-82.310314,34.466656],[-82.313996,34.484002]]]]},""type"":""Feature"",""properties"":{""NAME"":""Laurens"",""ALAND"":1848783527,""unemployment_rate"":4.4,""LSAD"":6,""AWATER"":25949287,""labor_force"":30194,""COUNTYFP"":59,""employed"":28869,""unemployment_level"":1325,""AFFGEOID"":""0500000US45059"",""GEOID"":45059,""STATEFP"":45,""COUNTYNS"":1248009}}",4.4
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-97.849492,44.195235],[-97.370115,44.194971],[-97.369463,43.848526],[-97.608517,43.849059],[-97.85111,43.849857],[-97.849492,44.195235]]]]},""type"":""Feature"",""properties"":{""NAME"":""Miner"",""ALAND"":1476889390,""unemployment_rate"":3,""LSAD"":6,""AWATER"":4382648,""labor_force"":1197,""COUNTYFP"":97,""employed"":1161,""unemployment_level"":36,""AFFGEOID"":""0500000US46097"",""GEOID"":46097,""STATEFP"":46,""COUNTYNS"":1265777}}",3.0
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-100.114336,28.648122],[-99.409021,28.640566],[-99.395736,28.640784],[-99.394177,28.204627],[-100.113719,28.197819],[-100.114336,28.648122]]]]},""type"":""Feature"",""properties"":{""NAME"":""Dimmit"",""ALAND"":3441795365,""unemployment_rate"":5.1,""LSAD"":6,""AWATER"":14576538,""labor_force"":6480,""COUNTYFP"":127,""employed"":6150,""unemployment_level"":330,""AFFGEOID"":""0500000US48127"",""GEOID"":48127,""STATEFP"":48,""COUNTYNS"":1383849}}",5.1
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-102.075929,33.389586],[-101.556884,33.39476],[-101.557434,32.961025],[-101.691284,32.961838],[-102.076214,32.959702],[-102.075929,33.389586]]]]},""type"":""Feature"",""properties"":{""NAME"":""Lynn"",""ALAND"":2309924845,""unemployment_rate"":3.8,""LSAD"":6,""AWATER"":4169719,""labor_force"":2720,""COUNTYFP"":305,""employed"":2618,""unemployment_level"":102,""AFFGEOID"":""0500000US48305"",""GEOID"":48305,""STATEFP"":48,""COUNTYNS"":1383938}}",3.8
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-99.303996,30.499832],[-98.964232,30.498482],[-98.59167,30.499875],[-98.587897,30.138954],[-98.920147,30.13829],[-99.300988,30.134298],[-99.301718,30.286653],[-99.303996,30.499832]]]]},""type"":""Feature"",""properties"":{""NAME"":""Gillespie"",""ALAND"":2740716834,""unemployment_rate"":2.6,""LSAD"":6,""AWATER"":9015052,""labor_force"":13193,""COUNTYFP"":171,""employed"":12853,""unemployment_level"":340,""AFFGEOID"":""0500000US48171"",""GEOID"":48171,""STATEFP"":48,""COUNTYNS"":1383871}}",2.6
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-77.181418,37.891654],[-77.167284,37.963904],[-77.070115,37.96477],[-77.040713,37.868937],[-76.943221,37.782955],[-76.804423,37.794892],[-76.751072,37.728605],[-76.693584,37.627876],[-76.654076,37.603174],[-76.646794,37.481154],[-76.712305,37.431309],[-76.741984,37.467076],[-76.792184,37.517594],[-76.777729,37.554446],[-76.915586,37.693325],[-77.033273,37.720809],[-77.103108,37.786034],[-77.169004,37.897045],[-77.181418,37.891654]]]]},""type"":""Feature"",""properties"":{""NAME"":""King and Queen"",""ALAND"":816244563,""unemployment_rate"":3.6,""LSAD"":6,""AWATER"":28884077,""labor_force"":3766,""COUNTYFP"":97,""employed"":3630,""unemployment_level"":136,""AFFGEOID"":""0500000US51097"",""GEOID"":51097,""STATEFP"":51,""COUNTYNS"":1480136}}",3.6
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-89.49516,37.324795],[-89.4736794345412,37.334853902194595],[-89.248439,37.335109],[-89.261779,37.105742],[-89.1666202120197,37.07211034379989],[-89.128899,37.017908],[-89.132915,36.982057],[-89.195039,36.989768],[-89.257608,37.015496],[-89.307436691173,37.0287594496279],[-89.359456,37.042606],[-89.384175,37.103267],[-89.456105,37.18812],[-89.470525,37.253357],[-89.482889284644,37.2609507184141],[-89.517032,37.28192],[-89.49516,37.324795]]]]},""type"":""Feature"",""properties"":{""NAME"":""Alexander"",""ALAND"":609996941,""unemployment_rate"":8,""LSAD"":6,""AWATER"":44237191,""labor_force"":2161,""COUNTYFP"":3,""employed"":1989,""unemployment_level"":172,""AFFGEOID"":""0500000US17003"",""GEOID"":17003,""STATEFP"":17,""COUNTYNS"":424203}}",8.0
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-84.004317,36.270378],[-83.981016,36.284978],[-83.954908,36.387623],[-83.921217,36.387879],[-83.905638,36.419979],[-83.805515,36.435879],[-83.73301,36.34498],[-83.667408,36.344381],[-83.714704,36.173783],[-83.732704,36.164583],[-83.905169,36.160906],[-83.941711,36.186378],[-83.998745,36.25237],[-84.004317,36.270378]]]]},""type"":""Feature"",""properties"":{""NAME"":""Union"",""ALAND"":579055053,""unemployment_rate"":4.4,""LSAD"":6,""AWATER"":61028041,""labor_force"":7359,""COUNTYFP"":173,""employed"":7038,""unemployment_level"":321,""AFFGEOID"":""0500000US47173"",""GEOID"":47173,""STATEFP"":47,""COUNTYNS"":1648583}}",4.4
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-86.085601,39.344189],[-85.952005,39.347373],[-85.684515,39.350049],[-85.686783,39.130859],[-85.799834,39.128897],[-85.798804,39.068536],[-85.860573,39.04091],[-86.080272,39.05027],[-86.07903,39.079641],[-86.085601,39.344189]]]]},""type"":""Feature"",""properties"":{""NAME"":""Bartholomew"",""ALAND"":1053869826,""unemployment_rate"":2.7,""LSAD"":6,""AWATER"":6814131,""labor_force"":44516,""COUNTYFP"":5,""employed"":43307,""unemployment_level"":1209,""AFFGEOID"":""0500000US18005"",""GEOID"":18005,""STATEFP"":18,""COUNTYNS"":451683}}",2.7
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-98.826008,34.594413],[-98.826041,34.855122],[-98.619816,34.854953],[-98.092645,34.854919],[-98.08901,34.834806],[-98.089098,34.681119],[-98.141799,34.681158],[-98.142148,34.506994],[-98.24412,34.507121],[-98.295928,34.449043],[-98.504988,34.420452],[-98.661956,34.405948],[-98.661982,34.50746],[-98.82607,34.50737],[-98.826008,34.594413]]]]},""type"":""Feature"",""properties"":{""NAME"":""Comanche"",""ALAND"":2769447440,""unemployment_rate"":4.4,""LSAD"":6,""AWATER"":37331078,""labor_force"":49246,""COUNTYFP"":31,""employed"":47061,""unemployment_level"":2185,""AFFGEOID"":""0500000US40031"",""GEOID"":40031,""STATEFP"":40,""COUNTYNS"":1101803}}",4.4
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-93.477233,39.292796],[-93.399133,39.226437],[-93.333337,39.250012],[-93.332252,39.309606],[-93.230079,39.327877],[-93.200708,39.401787],[-93.104485,39.383656],[-93.072915,39.33552],[-92.959801,39.312526],[-92.911669,39.223946],[-92.849224,39.226218],[-92.94385,39.121738],[-92.934569,39.064547],[-93.048471,38.972418],[-93.050453,38.928244],[-93.496377,38.942837],[-93.477233,39.292796]]]]},""type"":""Feature"",""properties"":{""NAME"":""Saline"",""ALAND"":1956716997,""unemployment_rate"":3.7,""LSAD"":6,""AWATER"":29587339,""labor_force"":10445,""COUNTYFP"":195,""employed"":10063,""unemployment_level"":382,""AFFGEOID"":""0500000US29195"",""GEOID"":29195,""STATEFP"":29,""COUNTYNS"":758550}}",3.7
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-88.4686624840513,31.893855711615597],[-88.46866,31.933173],[-88.45338776310929,32.053049205419704],[-88.4311453634628,32.227636234688894],[-88.428278,32.250143],[-88.4213122213943,32.308679123011295],[-87.930661,32.310574],[-88.019145,32.28524],[-88.007077,32.185313],[-88.113584,32.00624],[-88.07349,31.990182],[-88.121414,31.950256],[-88.180384,31.814546],[-88.088288,31.699303],[-88.4636253046849,31.697942371350194],[-88.468669,31.790722],[-88.4686624840513,31.893855711615597]]]]},""type"":""Feature"",""properties"":{""NAME"":""Choctaw"",""ALAND"":2365869837,""unemployment_rate"":6.4,""LSAD"":6,""AWATER"":19144469,""labor_force"":4336,""COUNTYFP"":23,""employed"":4059,""unemployment_level"":277,""AFFGEOID"":""0500000US01023"",""GEOID"":1023,""STATEFP"":1,""COUNTYNS"":161537}}",6.4
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-85.1291593155832,31.7802782680766],[-85.073941,31.771441],[-84.95864,31.777854],[-84.949784,31.679914],[-84.930998,31.672309],[-84.942353,31.618669],[-84.817843,31.619771],[-84.80796,31.514383],[-84.819807,31.501192],[-85.029227,31.486071],[-85.0516814295062,31.519540329141698],[-85.041881,31.544684],[-85.05796,31.57084],[-85.058169,31.620227],[-85.12553,31.694965],[-85.11893,31.732664],[-85.1254405773425,31.762968703418302],[-85.1291593155832,31.7802782680766]]]]},""type"":""Feature"",""properties"":{""NAME"":""Clay"",""ALAND"":506035793,""unemployment_rate"":8.9,""LSAD"":6,""AWATER"":56605066,""labor_force"":875,""COUNTYFP"":61,""employed"":797,""unemployment_level"":78,""AFFGEOID"":""0500000US13061"",""GEOID"":13061,""STATEFP"":13,""COUNTYNS"":344805}}",8.9
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-86.93284902849439,41.7164969379022],[-86.90913,41.726938],[-86.824828,41.76024],[-86.6413229205208,41.759674938142794],[-86.640044,41.759671],[-86.5242197424429,41.7595721559735],[-86.526682,41.65044],[-86.486433,41.570545],[-86.524711,41.432886],[-86.642542,41.432639],[-86.739995,41.321708],[-86.814652,41.273501],[-86.870265,41.264553],[-86.930079,41.236798],[-86.93284902849439,41.7164969379022]]]]},""type"":""Feature"",""properties"":{""NAME"":""LaPorte"",""ALAND"":1549582915,""unemployment_rate"":4.5,""LSAD"":6,""AWATER"":38751745,""labor_force"":47624,""COUNTYFP"":91,""employed"":45495,""unemployment_level"":2129,""AFFGEOID"":""0500000US18091"",""GEOID"":18091,""STATEFP"":18,""COUNTYNS"":450507}}",4.5
+"{""geometry"":{""type"":""MultiPolygon"",""coordinates"":[[[[-87.530054,40.250671],[-87.5270652633992,40.476882292461504],[-87.093676,40.475745],[-87.092148,40.366612],[-87.244898,40.309252],[-87.438755,40.165694],[-87.406667,40.127508],[-87.49041,40.127406],[-87.531021612428,40.1480353967457],[-87.530054,40.250671]]]]},""type"":""Feature"",""properties"":{""NAME"":""Warren"",""ALAND"":944520568,""unemployment_rate"":3.4,""LSAD"":6,""AWATER"":4466121,""labor_force"":4043,""COUNTYFP"":171,""employed"":3907,""unemployment_level"":136,""AFFGEOID"":""0500000US18171"",""GEOID"":18171,""STATEFP"":18,""COUNTYNS"":450400}}",3.4
+`
+    processeddata = [keplerGl.processCsvData(csvstring)]
+
+    // for debugging
+    //console.log(processeddata)
+
+    // match id with old datasets
+    newDataset = processeddata.map((d, i) => ({
+    version: 'v1',
+    data: {
+        id: 'data_layer_abc',
+        label: 'data_layer_abc',
+        allData: d.rows,
+        fields: d.fields
+    }
+    }));
+
+    newDatasets.push(newDataset[0]);
+
+    // for debugging
+    //console.log(newDataset)
+
+
+    const configstring = `{"version":"v1","config":{"mapStyle":{"visibleLayerGroups":{"water":true,"building":true,"road":true,"label":true,"land":true,"border":false},"mapStyles":{},"threeDBuildingColor":[9.665468314072013,17.18305478057247,31.1442867897876],"styleType":"light","topLayerGroups":{}},"mapState":{"dragRotate":false,"longitude":-122.80009283836715,"isSplit":false,"bearing":0,"zoom":8,"latitude":37.05881309947238,"pitch":0},"visState":{"filters":[],"splitMaps":[],"layerBlending":"normal","interactionConfig":{"tooltip":{"compareType":"absolute","enabled":false,"compareMode":false,"fieldsToShow":{}},"geocoder":{"enabled":false},"brush":{"enabled":false,"size":0.5},"coordinate":{"enabled":false}},"layers":[{"id":"abc","type":"geojson","config":{"dataId":"data_layer_abc","label":"Polygon: data_layer_abc","color":[255,0,0],"highlightColor":[118,42,131,255],"columns":{"geojson":"geojson"},"isVisible":true,"visConfig":{"opacity":1,"strokeOpacity":1,"thickness":2,"strokeColor":[0,0,0],"colorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#FFF7F3","#FDE0DD","#FCC5C0","#FA9FB5","#F768A1","#DD3497","#AE017E","#7A0177","#49006A"]},"strokeColorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#FFFFFF","#000000"]},"radius":10,"sizeRange":[0,10],"radiusRange":[0,50],"heightRange":[0,500],"elevationScale":1,"enableElevationZoomFactor":true,"stroked":false,"filled":true,"enable3d":false,"wireframe":false},"hidden":false,"textLabel":[{"field":null,"color":[255,255,255],"size":18,"offset":[0,0],"anchor":"start","alignment":"center"}]},"visualChannels":{"colorField":{"name":"Color","type":"real"},"colorScale":"quantize","strokeColorField":{"name":null,"type":"real"},"strokeColorScale":"quantile","sizeField":{"name":null,"type":"real"},"sizeScale":"linear","heightField":{"name":"null","type":"real"},"heightScale":"linear"}}],"animationConfig":{"speed":1,"currentTime":null}}}}`
+
+    const config = JSON.parse(configstring);
+
+    const loadedData = keplerGl.KeplerGlSchema.load(
+        newDatasets,
+        config
+    );
+
+    loadedData['options'] = {centerMap: true, readOnly: false};
+
+    store.dispatch(keplerGl.addDataToMap(loadedData));
+
+        
+        }(KeplerGl, store))
+    </script>
