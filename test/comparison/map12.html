@@ -3252,8 +3252,8 @@
     newDataset = processeddata.map((d, i) => ({
     version: 'v1',
     data: {
-        id: 'data_layer_BAW3qj4',
-        label: 'data_layer_BAW3qj4',
+        id: 'data_layer_abc',
+        label: 'data_layer_abc',
         allData: d.rows,
         fields: d.fields
     }
@@ -3265,7 +3265,7 @@
     //console.log(newDataset)
 
 
-    const configstring = `{"version":"v1","config":{"mapStyle":{"visibleLayerGroups":{"water":true,"building":true,"road":true,"label":true,"land":true,"border":false},"mapStyles":{},"threeDBuildingColor":[9.665468314072013,17.18305478057247,31.1442867897876],"styleType":"light","topLayerGroups":{}},"mapState":{"dragRotate":false,"longitude":-122.80009283836715,"isSplit":false,"bearing":0,"zoom":8,"latitude":37.05881309947238,"pitch":0},"visState":{"filters":[],"splitMaps":[],"layerBlending":"normal","interactionConfig":{"tooltip":{"compareType":"absolute","enabled":false,"compareMode":false,"fieldsToShow":{}},"geocoder":{"enabled":false},"brush":{"enabled":false,"size":0.5},"coordinate":{"enabled":false}},"layers":[{"id":"BAW3qj4","type":"hexagonId","config":{"dataId":"data_layer_BAW3qj4","label":"H3: data_layer_BAW3qj4","color":[23,184,190],"highlightColor":[118,42,131,255],"columns":{"hex_id":"h3"},"isVisible":true,"visConfig":{"opacity":1,"colorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#762A83","#AF8DC3","#E7D4E8","#D9F0D3","#7FBF7B","#1B7837"]},"coverage":0.95,"enable3d":false,"sizeRange":[0,500],"coverageRange":[0,1],"elevationScale":5,"enableElevationZoomFactor":true},"hidden":false,"textLabel":[{"field":null,"color":[255,255,255],"size":18,"offset":[0,0],"anchor":"start","alignment":"center","outlineWidth":0,"outlineColor":[255,0,0,255],"background":false,"backgroundColor":[0,0,200,255]}]},"visualChannels":{"colorField":{"name":"Color","type":"real"},"colorScale":"quantize","sizeField":{"name":null,"type":"real"},"sizeScale":"sqrt","coverageField":{"name":null,"type":"real"},"coverageScale":"linear"}}],"animationConfig":{"speed":1,"currentTime":null}}}}`
+    const configstring = `{"version":"v1","config":{"mapStyle":{"visibleLayerGroups":{"water":true,"building":true,"road":true,"label":true,"land":true,"border":false},"mapStyles":{},"threeDBuildingColor":[9.665468314072013,17.18305478057247,31.1442867897876],"styleType":"light","topLayerGroups":{}},"mapState":{"dragRotate":false,"longitude":-122.80009283836715,"isSplit":false,"bearing":0,"zoom":8,"latitude":37.05881309947238,"pitch":0},"visState":{"filters":[],"splitMaps":[],"layerBlending":"normal","interactionConfig":{"tooltip":{"compareType":"absolute","enabled":false,"compareMode":false,"fieldsToShow":{}},"geocoder":{"enabled":false},"brush":{"enabled":false,"size":0.5},"coordinate":{"enabled":false}},"layers":[{"id":"abc","type":"hexagonId","config":{"dataId":"data_layer_abc","label":"H3: data_layer_abc","color":[23,184,190],"highlightColor":[118,42,131,255],"columns":{"hex_id":"h3"},"isVisible":true,"visConfig":{"opacity":1,"colorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#762A83","#AF8DC3","#E7D4E8","#D9F0D3","#7FBF7B","#1B7837"]},"coverage":0.95,"enable3d":false,"sizeRange":[0,500],"coverageRange":[0,1],"elevationScale":5,"enableElevationZoomFactor":true},"hidden":false,"textLabel":[{"field":null,"color":[255,255,255],"size":18,"offset":[0,0],"anchor":"start","alignment":"center","outlineWidth":0,"outlineColor":[255,0,0,255],"background":false,"backgroundColor":[0,0,200,255]}]},"visualChannels":{"colorField":{"name":"Color","type":"real"},"colorScale":"quantize","sizeField":{"name":null,"type":"real"},"sizeScale":"sqrt","coverageField":{"name":null,"type":"real"},"coverageScale":"linear"}}],"animationConfig":{"speed":1,"currentTime":null}}}}`
 
     const config = JSON.parse(configstring);
 

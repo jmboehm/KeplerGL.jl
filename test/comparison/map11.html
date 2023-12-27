@@ -3252,8 +3252,8 @@
     newDataset = processeddata.map((d, i) => ({
     version: 'v1',
     data: {
-        id: 'data_layer_SCDrGxT',
-        label: 'data_layer_SCDrGxT',
+        id: 'data_layer_abc',
+        label: 'data_layer_abc',
         allData: d.rows,
         fields: d.fields
     }
@@ -3265,7 +3265,7 @@
     //console.log(newDataset)
 
 
-    const configstring = `{"version":"v1","config":{"mapStyle":{"visibleLayerGroups":{"water":true,"building":true,"road":true,"label":true,"land":true,"border":false},"mapStyles":{},"threeDBuildingColor":[9.665468314072013,17.18305478057247,31.1442867897876],"styleType":"light","topLayerGroups":{}},"mapState":{"dragRotate":false,"longitude":-122.80009283836715,"isSplit":false,"bearing":0,"zoom":8,"latitude":37.05881309947238,"pitch":0},"visState":{"filters":[],"splitMaps":[],"layerBlending":"normal","interactionConfig":{"tooltip":{"compareType":"absolute","enabled":false,"compareMode":false,"fieldsToShow":{}},"geocoder":{"enabled":false},"brush":{"enabled":false,"size":0.5},"coordinate":{"enabled":false}},"layers":[{"id":"SCDrGxT","type":"icon","config":{"dataId":"data_layer_SCDrGxT","label":"Icon: data_layer_SCDrGxT","color":[0,0,0],"highlightColor":[118,42,131,255],"columns":{"lat":"Latitude","lng":"Longitude","icon":"icon","altitude":null},"isVisible":true,"visConfig":{"radius":10,"fixedRadius":false,"opacity":1,"colorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#762A83","#AF8DC3","#E7D4E8","#D9F0D3","#7FBF7B","#1B7837"]},"radiusRange":[5,15]},"hidden":false,"textLabel":[{"field":null,"color":[255,255,255],"size":18,"offset":[0,0],"anchor":"start","alignment":"center"}]},"visualChannels":{"colorField":{"name":null,"type":"real"},"colorScale":"quantize","sizeField":{"name":null,"type":"real"},"sizeScale":"sqrt"}}],"animationConfig":{"speed":1,"currentTime":null}}}}`
+    const configstring = `{"version":"v1","config":{"mapStyle":{"visibleLayerGroups":{"water":true,"building":true,"road":true,"label":true,"land":true,"border":false},"mapStyles":{},"threeDBuildingColor":[9.665468314072013,17.18305478057247,31.1442867897876],"styleType":"light","topLayerGroups":{}},"mapState":{"dragRotate":false,"longitude":-122.80009283836715,"isSplit":false,"bearing":0,"zoom":8,"latitude":37.05881309947238,"pitch":0},"visState":{"filters":[],"splitMaps":[],"layerBlending":"normal","interactionConfig":{"tooltip":{"compareType":"absolute","enabled":false,"compareMode":false,"fieldsToShow":{}},"geocoder":{"enabled":false},"brush":{"enabled":false,"size":0.5},"coordinate":{"enabled":false}},"layers":[{"id":"abc","type":"icon","config":{"dataId":"data_layer_abc","label":"Icon: data_layer_abc","color":[0,0,0],"highlightColor":[118,42,131,255],"columns":{"lat":"Latitude","lng":"Longitude","icon":"icon","altitude":null},"isVisible":true,"visConfig":{"radius":10,"fixedRadius":false,"opacity":1,"colorRange":{"name":"Custom Palette","type":"custom","category":"Custom","colors":["#762A83","#AF8DC3","#E7D4E8","#D9F0D3","#7FBF7B","#1B7837"]},"radiusRange":[5,15]},"hidden":false,"textLabel":[{"field":null,"color":[255,255,255],"size":18,"offset":[0,0],"anchor":"start","alignment":"center"}]},"visualChannels":{"colorField":{"name":null,"type":"real"},"colorScale":"quantize","sizeField":{"name":null,"type":"real"},"sizeScale":"sqrt"}}],"animationConfig":{"speed":1,"currentTime":null}}}}`
 
     const config = JSON.parse(configstring);
 
