@@ -7,7 +7,7 @@
 
 <h3></h3>
 
-<img width="600" alt="Kepler.gl Demo" src="assets/img/earthquakes.png">
+<img width="600" alt="Kepler.gl Demo" src="docs/src/assets/sf.png">
 
 Julia package to create, render, and export geospatial maps, using [Kepler.gl](http://kepler.gl), via [Blink.jl](https://github.com/JuliaGizmos/Blink.jl). 
 
@@ -15,7 +15,7 @@ Currently uses version 2.5.5 of Kepler.gl.
 
 ## Example
 
-The following code produces the point map above:
+The following code produces a simple point map:
 
 ```julia
 using KeplerGL, Colors, ColorBrewer
@@ -42,94 +42,30 @@ win = KeplerGL.render(m);
 KeplerGL.export_image(win, "assets/img/earthquakes.png")
 ```
 
+<img width="500" alt="Kepler.gl Demo" src="assets/img/earthquakes.png">
+
+
 ## Layers
 
 At this point the following layers are implemented:
 
-### Point layer
-```julia
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-KeplerGL.add_point_layer!(m, df, :Latitude, :Longitude,
-    color = colorant"rgb(23,184,190)", color_field = :Magnitude, color_scale = "quantize", 
-    color_range = ColorBrewer.palette("PRGn", 6),
-    radius_field = :Magnitude, radius_scale = "sqrt", radius_range = [4.2, 96.2], radius_fixed = false,
-    filled = true, opacity = 0.39, outline = false);
-w = KeplerGL.render(m);
+- [Point Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Point-Layers)
+- [Polygon Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Polygon-Layers)
+- [Hexbin Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Hexbin-Layers)
+- [Line Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Line-Layers)
+- [Arc Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Arc-Layers)
+- [Grid Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Grid-Layers)
+- [Heatmap Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Heatmap-Layers)
+- [Cluster Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Cluster-Layers)
+- [Icon Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Icon-Layers)
+- [H3 Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#H3-Layers)
+
+## Installation
+
+To install the package, type in the Julia command prompt
+
+```
+] add https://github.com/jmboehm/KeplerGL.jl
 ```
 
-### Polygon layer
-```julia
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/counties-unemployment.csv", DataFrame)
-KeplerGL.add_polygon_layer!(m, df, :_geojson ,
-    color = colorant"red", color_field = :unemployment_rate, color_range = ColorBrewer.palette("RdPu", 9))
-w = KeplerGL.render(m)
-```
-
-### Hexbin layer
-```julia
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-KeplerGL.add_hexagon_layer!(m, df, :Latitude, :Longitude, opacity = 0.5, color_field = :Magnitude, color_scale = "quantile",
-    radius = 20.0, color_range = ColorBrewer.palette("BuPu",6), color_aggregation = "average", coverage = 0.95,
-    height_field = :Magnitude )
-w = KeplerGL.render(m)
-```
-
-### Line layer
-```julia
-using Random
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-rng = MersenneTwister(12345)
-df.Latitude1 = df.Latitude .+ (rand(rng, Float64, length(df.Latitude)) .- 0.5)
-df.Longitude1 = df.Longitude .+ 10.0 .* (rand(rng, Float64, length(df.Longitude)) .- 0.5) 
-KeplerGL.add_line_layer!(m, df, :Latitude, :Longitude, :Latitude1, :Longitude1,
-    opacity = 0.5, color_field = :Magnitude, color_scale = "quantile",
-    color_range = ColorBrewer.palette("BuPu",6), thickness = 3)
-w = KeplerGL.render(m)
-```
-
-### Arc layer
-```julia
-using Random
-m = KeplerGL.KeplerGLMap(token)
-m.window[:toggle_3d_show] = true
-rng = MersenneTwister(12345)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-df.Latitude1 = df.Latitude .+ (rand(rng, Float64, length(df.Latitude)) .- 0.5)
-df.Longitude1 = df.Longitude .+ 10.0 .* (rand(rng, Float64, length(df.Longitude)) .- 0.5) 
-KeplerGL.add_arc_layer!(m, df, :Latitude, :Longitude, :Latitude1, :Longitude1,  id = "abc", 
-    opacity = 0.5, color_field = :Magnitude, color_scale = "quantile",
-    color_range = ColorBrewer.palette("BuPu",6), thickness = 3)
-w = KeplerGL.render(m)
-```
-
-### Grid layer
-```julia
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-KeplerGL.add_grid_layer!(m, df, :Latitude, :Longitude, opacity = 0.5, color_field = :Magnitude, color_scale = "quantile",
-    radius = 20.0, color_range = ColorBrewer.palette("BuPu",6), color_aggregation = "average", coverage = 0.95,
-    height_field = :Magnitude )
-w = KeplerGL.render(m)
-```
-
-### Heatmap layer
-```julia
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-KeplerGL.add_heatmap_layer!(m, df, :Latitude, :Longitude, opacity = 0.5, weight_field = :Magnitude, weight_scale = "linear",
-    radius = 20.0, color_range = ColorBrewer.palette("BuPu",6) )
-w = KeplerGL.render(m)
-```
-
-### Cluster layer
-```julia
-m = KeplerGL.KeplerGLMap(token)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
-KeplerGL.add_cluster_layer!(m, df, :Latitude, :Longitude, opacity = 0.5, color_field = :Magnitude, color_scale = "quantile",
-    radius_range = [1,40], cluster_radius = 20, color_range = ColorBrewer.palette("BuPu",6), color_aggregation = "count" )
-w = KeplerGL.render(m)
-```
+The package will soon be registered in Julia's `General` registry.

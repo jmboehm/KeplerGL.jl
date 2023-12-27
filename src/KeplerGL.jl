@@ -48,7 +48,8 @@ include("layers/line.jl")
 include("layers/arc.jl")
 include("layers/heatmap.jl")
 include("layers/cluster.jl")
-
+include("layers/icon.jl")
+include("layers/h3.jl")
 
 include("export.jl")
 

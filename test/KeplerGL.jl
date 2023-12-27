@@ -307,3 +307,38 @@ if write_to_disk
 end
 @test comparewithfile(s, "../test/comparison/map10.html")
 # win = KeplerGL.render(m)
+
+# 11.) Icon layer 
+m = KeplerGL.KeplerGLMap(token)
+df = CSV.read("../assets/example_data/data.csv", DataFrame)
+df.icon = rand(rng, ["circle", "plus", "delete"], length(df.Latitude))
+KeplerGL.add_icon_layer!(m, df, :Latitude, :Longitude, :icon, color = colorant"black");
+s = KeplerGL.get_html(m)
+# # use this to write the string s to a reference file
+if write_to_disk
+    f = open("../test/comparison/map11.html", "w")
+    write(f, s)
+    close(f)
+end
+@test comparewithfile(s, "../test/comparison/map11.html")
+# KeplerGL.render(m)
+
+# 12.) H3
+using H3, H3.API
+m = KeplerGL.KeplerGLMap(token)
+df = CSV.read("../assets/example_data/data.csv", DataFrame)
+coord = H3.Lib.GeoCoord.(deg2rad.(df.Latitude), deg2rad.(df.Longitude) )
+h3 = H3.API.geoToH3.(coord, 5)
+df.h3str = H3.API.h3ToString.(h3)
+KeplerGL.add_h3_layer!(m, df, :h3str,
+    color = colorant"rgb(23,184,190)", color_field = :Magnitude, color_scale = "quantize", 
+    color_range = ColorBrewer.palette("PRGn", 6));
+s = KeplerGL.get_html(m)
+# # use this to write the string s to a reference file
+if write_to_disk
+    f = open("../test/comparison/map12.html", "w")
+    write(f, s)
+    close(f)
+end
+@test comparewithfile(s, "../test/comparison/map12.html")
+# KeplerGL.render(m)

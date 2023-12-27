@@ -2,7 +2,7 @@
 
 julia_version = "1.9.0"
 manifest_format = "2.0"
-project_hash = "e4c85302d5303e50a5b2c409a4513ea5139404fc"
+project_hash = "4b3cfb70ae06ab584ffe7188fbd973c66b17cada"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -42,6 +42,12 @@ version = "0.1.0"
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
+[[deps.BinaryProvider]]
+deps = ["Libdl", "Logging", "SHA"]
+git-tree-sha1 = "ecdec412a9abc8db54c0efc5548c64dfce072058"
+uuid = "b99e7846-7c00-51b0-8f62-c81ae34c0232"
+version = "0.5.10"
+
 [[deps.BitFlags]]
 git-tree-sha1 = "2dc09997850d68179b69dafb58ae806167a32b1b"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
@@ -52,6 +58,11 @@ deps = ["Base64", "Distributed", "HTTP", "JSExpr", "JSON", "Lazy", "Logging", "M
 git-tree-sha1 = "b1c61fd7e757c7e5ca6521ef41df8d929f41e3af"
 uuid = "ad839575-38b3-5650-b840-f874b8c74a25"
 version = "0.12.8"
+
+[[deps.CEnum]]
+git-tree-sha1 = "eb4cb44a499229b3b8426dcfb5dd85333951ff90"
+uuid = "fa961155-64e5-5f13-b03f-caf6b980ea82"
+version = "0.4.2"
 
 [[deps.CSV]]
 deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
@@ -232,6 +243,18 @@ deps = ["Artifacts", "Expat_jll", "JLLWrappers", "LibCURL_jll", "Libdl", "Libico
 git-tree-sha1 = "bb8f7cc77ec1152414b2af6db533d9471cfbb2d1"
 uuid = "f8c6e375-362e-5223-8a59-34ff63f689eb"
 version = "2.42.0+0"
+
+[[deps.H3]]
+deps = ["BinaryProvider", "CEnum", "H3_jll", "Libdl"]
+git-tree-sha1 = "a2658593c1f4f74472668eeb28371343359ee562"
+uuid = "f62fece2-b996-571a-b4c9-e662aba1c617"
+version = "0.2.0"
+
+[[deps.H3_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "864761dbb7c704a48bb50f26d19c74e26cf4e498"
+uuid = "60c8821e-da38-5dbd-93c7-983f1e6d69be"
+version = "3.7.2+0"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]

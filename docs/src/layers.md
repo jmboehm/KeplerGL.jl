@@ -52,3 +52,15 @@ KeplerGL.add_heatmap_layer!
 ```@docs
 KeplerGL.add_cluster_layer!
 ```
+
+## Icon Layers
+
+```@docs
+KeplerGL.add_icon_layer!
+```
+
+## H3 Layers
+
+```@docs
+KeplerGL.add_h3_layer!
+```
