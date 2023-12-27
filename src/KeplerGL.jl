@@ -50,6 +50,7 @@ include("layers/heatmap.jl")
 include("layers/cluster.jl")
 include("layers/icon.jl")
 include("layers/h3.jl")
+include("layers/trip.jl")
 
 include("export.jl")
 

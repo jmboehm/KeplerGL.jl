@@ -230,5 +230,13 @@ KeplerGL.add_h3_layer!(m, df, :h3str,
     color_range = ColorBrewer.palette("PRGn", 6));
 KeplerGL.render(m)
 
-
-CSV.write("test.csv",df)
+# 13.) Trip layer
+include("../src/KeplerGL.jl")
+using JSON3
+t = JSON3.read("assets/example_data/trip_example.geojson")
+df = DataFrame(:geometry => string.(t[:features]))
+m = KeplerGL.KeplerGLMap(token)
+KeplerGL.add_trip_layer!(m, df, :geometry ,
+    id = "abc",
+    color = colorant"red")
+win = KeplerGL.render(m)

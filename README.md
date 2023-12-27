@@ -59,6 +59,7 @@ At this point the following layers are implemented:
 - [Cluster Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Cluster-Layers)
 - [Icon Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Icon-Layers)
 - [H3 Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#H3-Layers)
+- [Trip Layers](https://jmboehm.github.io/KeplerGL.jl/dev/layers/#Trip-Layers)
 
 ## Installation
 

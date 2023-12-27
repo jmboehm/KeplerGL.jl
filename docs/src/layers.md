@@ -64,3 +64,9 @@ KeplerGL.add_icon_layer!
 ```@docs
 KeplerGL.add_h3_layer!
 ```
+
+## Trip Layers
+
+```@docs
+KeplerGL.add_trip_layer!
+```

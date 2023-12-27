@@ -323,7 +323,7 @@ end
 @test comparewithfile(s, "../test/comparison/map11.html")
 # KeplerGL.render(m)
 
-# 12.) H3
+# 12.) H3 layer
 using H3, H3.API
 m = KeplerGL.KeplerGLMap(token)
 df = CSV.read("../assets/example_data/data.csv", DataFrame)
@@ -341,4 +341,22 @@ if write_to_disk
     close(f)
 end
 @test comparewithfile(s, "../test/comparison/map12.html")
+# KeplerGL.render(m)
+
+# 13.) Trip layer
+using JSON3
+t = JSON3.read("../assets/example_data/trip_example.geojson")
+df = DataFrame(:geometry => string.(t[:features]))
+m = KeplerGL.KeplerGLMap(token)
+KeplerGL.add_trip_layer!(m, df, :geometry ,
+    id = "abc",
+    color = colorant"red")
+s = KeplerGL.get_html(m)
+# # use this to write the string s to a reference file
+if write_to_disk
+    f = open("../test/comparison/map13.html", "w")
+    write(f, s)
+    close(f)
+end
+@test comparewithfile(s, "../test/comparison/map13.html")
 # KeplerGL.render(m)
