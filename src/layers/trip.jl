@@ -18,7 +18,7 @@ Adds a polygon layer to the map `m`, drawing data from `table`.
 # Required Arguments
 - `m::KeplerGLMap`: the map that the layer should be added to
 - `table`: a `Tables.jl`-compatible table that contains the data to draw from 
-- `geojson::Symbo`: name of the column of `table` that contains the trip in GeoJSON format (as `LineString`, see [here](https://docs.kepler.gl/docs/user-guides/c-types-of-layers/k-trip))
+- `geojson::Symbol`: name of the column of `table` that contains the trip in GeoJSON format (as `LineString`, see [here](https://docs.kepler.gl/docs/user-guides/c-types-of-layers/k-trip))
 
 # Optional Arguments
 - `id = randstring(7)`: the string id of the layer

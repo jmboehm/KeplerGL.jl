@@ -379,4 +379,29 @@ function render(map::KeplerGLMap)
 
 end
 
+"""
+    hide_buttons!(m::KeplerGLMap)
 
+Hides all buttons (legend, 3d, etc) on the top right corner of a `KeplerGLMap`
+
+# Required Arguments
+- `m::KeplerGLMap`: the map that should be affected
+"""
+function hide_buttons!(m::KeplerGLMap)
+    m.window[:map_legend_show] = false
+    m.window[:visible_layers_show] = false
+    m.window[:split_map_show] = false
+    m.window[:toggle_3d_show] = false
+end
+
+"""
+    hide_legend!(m::KeplerGLMap)
+
+Hides the legend on the top right corner of a `KeplerGLMap`
+
+# Required Arguments
+- `m::KeplerGLMap`: the map that should be affected
+"""
+function hide_legend!(m::KeplerGLMap)
+    m.window[:map_legend_show]=false
+end

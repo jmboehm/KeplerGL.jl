@@ -23,6 +23,16 @@ KeplerGL.get_html
 KeplerGL.make_dispatch_code
 ```
 
+## Map aesthetics
+
+```@docs
+KeplerGL.hide_buttons!
+```
+
+```@docs
+KeplerGL.hide_legend!
+```
+
 ## Loading and saving/exporting
 
 
