@@ -1,5 +1,6 @@
 # KeplerGL.jl
 
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://jmboehm.github.io/KeplerGL.jl/stable/)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://jmboehm.github.io/KeplerGL.jl/dev/)
 [![Build Status](https://github.com/jmboehm/KeplerGL.jl/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jmboehm/KeplerGL.jl/actions/workflows/ci.yml?query=branch%3Amain)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/jmboehm/KeplerGL.jl/blob/main/LICENSE)
@@ -66,7 +67,5 @@ At this point the following layers are implemented:
 To install the package, type in the Julia command prompt
 
 ```
-] add https://github.com/jmboehm/KeplerGL.jl
+] add KeplerGL
 ```
-
-The package will soon be registered in Julia's `General` registry.

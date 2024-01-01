@@ -79,8 +79,11 @@ function add_trip_layer!(
         df_to_use[!,:OutlineWidth] = Tables.getcolumn(cols, outline_width_field)
     end
 
+    # i'm choosing a buffer size based on the size of the :geojson column, plus a bit 
+    # if this is still too low, it will error...
+    bufsize_exp = Int(maximum(floor.(log2.(sizeof.(df_to_use[!,:geojson]))))) + 6
     buf = IOBuffer()
-    CSV.write(buf, df_to_use)
+    CSV.write(buf, df_to_use, bufsize=2^bufsize_exp)
     data_csv = String(take!(buf))
 
     # data code 

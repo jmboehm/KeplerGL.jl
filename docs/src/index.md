@@ -13,13 +13,11 @@ Depth = 3
 
 ## Installation
 
-To install the package, type in the Julia command prompt
+To install the package, type in the Julia REPL
 
 ```
-] add https://github.com/jmboehm/KeplerGL.jl
+] add KeplerGL
 ```
-
-The package will be registered in Julia's `General` registry once it's a bit more mature.
 
 ## Support policy
 
