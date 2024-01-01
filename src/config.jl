@@ -1,13 +1,13 @@
-function create_config()
+# function create_config()
 
-end
+# end
 
-# two presets: 
+# # two presets: 
 
-# interactive window
-function interactive()
+# # interactive window
+# function interactive()
 
-end
+# end
 
 # this returns a minimal config for a static map
 function make_static_config()

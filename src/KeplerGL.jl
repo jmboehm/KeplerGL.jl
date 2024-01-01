@@ -22,7 +22,10 @@ using Base64
 ##
 ##############################################################################
 
-export KeplerGLMap, make_static_config #, load_map_from_json!, show
+export KeplerGLMap, make_static_config, render, export_image,
+     load_map_from_json!, load_config_from_json!, load_map_from_json,
+     add_grid_layer!, add_arc_layer!, add_cluster_layer!, add_h3_layer!, add_heatmap_layer!,
+     add_hexagon_layer!, add_icon_layer!, add_line_layer!, add_polygon_layer!, add_trip_layer!
 
 ##############################################################################
 ##
@@ -30,9 +33,6 @@ export KeplerGLMap, make_static_config #, load_map_from_json!, show
 ##
 ##############################################################################
 include("KeplerGLData.jl")
-
-# include("layer.jl")
-# include("layers/PointLayer.jl")
 
 include("config.jl")
 include("map.jl")
