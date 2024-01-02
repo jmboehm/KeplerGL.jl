@@ -1,7 +1,7 @@
 name = "KeplerGL"
 uuid = "389c4311-7670-4ca7-a1b4-f34bb8a2527a"
 authors = ["Johannes Boehm <johannes.boehm@gmail.com>"]
-version = "0.0.2"
+version = "0.0.3"
 
 [deps]
 Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"

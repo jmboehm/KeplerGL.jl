@@ -10,7 +10,7 @@ Exports an image from `window` to `filename` of the format specified by `imageDa
 - `filename`: path to the file to be saved.
 - `width`: width of the exported image, in pixels.
 - `height`: height of the exported image, in pixels.
-- `imageDataUri = "data:image/png;base64,2i3u"`: export image data uri.
+- `imageDataUri = "data:image/png;base64,2i3u"`: export image data uri. For JPG, choose `"data:image/jpg;base64,"`.
 """
 function export_image(window,filename; 
     width = 1000, height = 800,
@@ -24,8 +24,8 @@ function export_image(window,filename;
             store.dispatch(keplerGl.setExportImageSetting({
             exporting: true, 
             processing: true,
-            mapW: 1000,
-            mapH: 800,
+            mapW: $width,
+            mapH: $height,
             imageSize: {
                 imageH: $height,
                 imageW: $width,
