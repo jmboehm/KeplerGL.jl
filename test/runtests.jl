@@ -11,13 +11,13 @@ to fail
 =#
 Aqua.test_ambiguities(KeplerGL; recursive=false)
 Aqua.test_all(KeplerGL; ambiguities=false)
-
 tests = [
-        "KeplerGL.jl"
+    "KeplerGL.jl"
     ]
 
 for test in tests
     @testset "$test" begin
+        println("hi: $test")
         include(test)
     end
 end
