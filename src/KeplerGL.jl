@@ -9,6 +9,7 @@ module KeplerGL
 using Reexport
 @reexport using KeplerGLBase
 
+using Base64
 using WebIO, Blink
 
 ##############################################################################

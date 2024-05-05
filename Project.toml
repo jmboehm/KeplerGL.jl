@@ -4,6 +4,7 @@ authors = ["Johannes Boehm <johannes.boehm@gmail.com>"]
 version = "0.0.3"
 
 [deps]
+Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 Blink = "ad839575-38b3-5650-b840-f874b8c74a25"
 KeplerGLBase = "aea72984-0742-4639-bc0a-1d6e7e468236"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
@@ -11,6 +12,7 @@ WebIO = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
 
 [compat]
 Aqua = "0.8"
+Base64 = "<0.0.1, 1"
 Blink = "0.12"
 KeplerGLBase = "0.0.1"
 Reexport = "1"
