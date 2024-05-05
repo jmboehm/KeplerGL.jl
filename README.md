@@ -19,12 +19,12 @@ Currently uses version 2.5.5 of Kepler.gl.
 The following code produces a simple point map:
 
 ```julia
-using KeplerGL, Colors, ColorBrewer
+using KeplerGL, Colors, ColorBrewer, CSV, DataFrames
 
 token = "<INSERT MAPBOX TOKEN HERE>"
 
 m = KeplerGL.KeplerGLMap(token, center_map=false)
-df = CSV.read("assets/example_data/data.csv", DataFrame)
+df = CSV.read(joinpath(pathof(KeplerGL.KeplerGLBase), "..", "..", "assets", "example_data", "data.csv"), DataFrame)
 KeplerGL.add_point_layer!(m, df, :Latitude, :Longitude,
     color = colorant"rgb(23,184,190)", color_field = :Magnitude, color_scale = "quantize", 
     color_range = ColorBrewer.palette("PRGn", 6),

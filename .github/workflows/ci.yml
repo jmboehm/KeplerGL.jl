@@ -41,6 +41,7 @@ jobs:
       - uses: actions/cache@v1
         env:
           cache-name: cache-artifacts
+          MAPBOX_KEY: ${{ secrets.MAPBOX_KEY }}
         with:
           path: ~/.julia/artifacts
           key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
