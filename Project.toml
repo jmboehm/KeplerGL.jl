@@ -12,6 +12,8 @@ WebIO = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
 [compat]
 Aqua = "0.8"
 Blink = "0.12"
+KeplerGLBase = "0.0.1"
+Reexport = "1"
 WebIO = "0.8"
 julia = "^1.6"
 
