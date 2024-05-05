@@ -7,7 +7,7 @@ using KeplerGL
 using Blink
 using Test
 
-token = ENV["MAPBOX_TOKEN"]
+token = ENV["MAPBOX_KEY"]
 
 # load an existing kepler.gl map (in json form) and show it
 m = KeplerGL.KeplerGLMap(token)
