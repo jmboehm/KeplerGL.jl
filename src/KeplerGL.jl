@@ -8,6 +8,7 @@ module KeplerGL
 
 using Reexport
 @reexport using KeplerGLBase
+import KeplerGLBase: get_html
 
 using Base64
 using WebIO, Blink
