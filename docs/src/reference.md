@@ -20,17 +20,17 @@ KeplerGL.get_html
 ```
 
 ```@docs
-KeplerGL.make_dispatch_code
+KeplerGLBase.make_dispatch_code
 ```
 
 ## Map aesthetics
 
 ```@docs
-KeplerGL.hide_buttons!
+KeplerGLBase.hide_buttons!
 ```
 
 ```@docs
-KeplerGL.hide_legend!
+KeplerGLBase.hide_legend!
 ```
 
 ## Loading and saving/exporting
@@ -49,7 +49,7 @@ KeplerGL.load_config_from_json!
 ```
 
 ```@docs
-KeplerGL.get_json
+KeplerGLBase.get_json
 ```
 
 ```@docs
@@ -60,17 +60,17 @@ KeplerGL.export_image
 ## KeplerGLData
 
 ```@docs
-KeplerGL.AbstractKeplerGLData
+KeplerGLBase.AbstractKeplerGLData
 ```
 
 ```@docs
-KeplerGL.FieldsRowsData
+KeplerGLBase.FieldsRowsData
 ```
 
 ```@docs
-KeplerGL.GeoJSONData
+KeplerGLBase.GeoJSONData
 ```
 
 ```@docs
-KeplerGL.CSVData
+KeplerGLBase.CSVData
 ```
