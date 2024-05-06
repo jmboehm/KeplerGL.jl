@@ -17,7 +17,6 @@ tests = [
 
 for test in tests
     @testset "$test" begin
-        println("hi: $test")
         include(test)
     end
 end
