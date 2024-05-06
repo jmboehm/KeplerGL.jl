@@ -18,6 +18,11 @@ To install the package, type in the Julia REPL
 ```
 ] add KeplerGL
 ```
+This also installs `KeplerGLBase` and other dependencies.
+
+## Structure
+
+The code is separated into two packages: [KeplerGLBase.jl](https://github.com/jmboehm/KeplerGLBase.jl) contains the code that generates the map JSONs and HTML. [KeplerGL.jl](https://github.com/jmboehm/KeplerGL.jl) contains the code to display the HTML in a [Blink.jl](https://github.com/JuliaGizmos/Blink.jl) window. That way other front ends (like Genie/Stipple, see [here](https://github.com/GenieFramework/StippleKeplerGL.jl)) do not need to load the heavier dependencies.
 
 ## Support policy
 
@@ -36,8 +41,7 @@ Some principles I had in mind when creating the package:
 
 ## Roadmap
 
-1. Finish support for all layer types implemented in Kepler.gl.
-2. Filters, tooltips, legends, base maps
+1. Filters, tooltips, legends, base maps
 2. More and better data import options
 3. More and better map export options
 4. Update to Kepler.gl 3.0

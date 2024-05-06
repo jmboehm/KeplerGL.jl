@@ -1,12 +1,13 @@
 using Documenter
 using KeplerGL
+using KeplerGLBase
 
 push!(LOAD_PATH,"../src/")
 
 makedocs(
     sitename = "KeplerGL.jl",
     format = Documenter.HTML(),
-    modules = [KeplerGL],
+    modules = [KeplerGL, KeplerGLBase],
     pages = [
         "Introduction" => "index.md",
         "Layers" => "layers.md",
