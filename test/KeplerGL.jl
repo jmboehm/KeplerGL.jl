@@ -6,6 +6,7 @@ using KeplerGL
 
 using Blink
 using Test
+using Sockets
 
 token = ENV["MAPBOX_KEY"]
 
@@ -15,8 +16,6 @@ m = KeplerGL.KeplerGLMap(token)
 example_dir = joinpath(Base.pkgdir(KeplerGLBase), "assets", "example_data")
 KeplerGL.load_map_from_json!(m, joinpath(example_dir, "earthquakes.kepler.gl.json"));
 
-
-# # Testing the exporting requires a mapbox token... don't do this at this point
 win = KeplerGL.render(m, show=false);
 # # Exporting an image
 wait(win.inittask)
