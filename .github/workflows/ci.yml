@@ -32,6 +32,8 @@ jobs:
             allow_failure: false
           - version: '1.9'
             allow_failure: false
+          - os: ubuntu-latest
+            prefix: xvfb-run
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
@@ -50,6 +52,9 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       - uses: julia-actions/julia-buildpkg@v1
+      - name: Install XVFB
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install xvfb
       - uses: julia-actions/julia-runtest@v1
         env:
           MAPBOX_KEY: ${{ secrets.MAPBOX_KEY }}
