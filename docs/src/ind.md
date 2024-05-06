@@ -1,5 +1,5 @@
 # Index
 
 ```@index
-Modules = [KeplerGL]
+Modules = [KeplerGL, KeplerGLBase]
 ```
