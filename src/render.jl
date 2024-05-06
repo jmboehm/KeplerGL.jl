@@ -1,5 +1,5 @@
 """
-    render(map::KeplerGLMap)
+    render(map::KeplerGLMap; show::Bool = true)
 
 Renders a `KeplerGLMap` in a new `Blink.jl` window and returns this window.
 
